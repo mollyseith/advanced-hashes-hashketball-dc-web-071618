@@ -146,7 +146,7 @@ def game_hash
   }
 end
 
-
+#takes in an argument of a player's name and returns number of points scored for that player
 def num_points_scored(name)
   #1st level
   game_hash.each do |location, team_data|
@@ -167,6 +167,7 @@ def num_points_scored(name)
   end
 end
 
+#takes in an argument of a player's name and returns the shoe size for that player
 def shoe_size(name)
   #third level
   game_hash.each do |location, team_data|
@@ -184,6 +185,7 @@ def shoe_size(name)
   end
 end
 
+#takes in an argument of the team name and returns an array of that teams colors
 def team_colors(team_name)
   colors = []
   #top level
@@ -202,6 +204,7 @@ def team_colors(team_name)
   colors = colors.flatten
 end
 
+#operates on the game hash to return an array of the team names
 def team_names
   team_names = []
   #top level
@@ -217,6 +220,7 @@ def team_names
   team_names = team_names.flatten
 end
 
+#takes in an argument of a team name and returns an array of the jersey number's for that team
 def player_numbers(team_name)
   player_nums = []
  #top level
@@ -240,6 +244,7 @@ def player_numbers(team_name)
   player_nums
 end
 
+#takes in an argument of a player's name and returns a hash of that player's stats
 def player_stats(name)
   statistics = {}
  #top level
@@ -257,6 +262,9 @@ def player_stats(name)
   statistics
 end
 
+#return the number of rebounds associated with the player that has the largest shoe size
+#find the player with the largest shoe size
+#return that player's number of rebounds
 def big_shoe_rebounds
   player_shoe_sizes = {}
   largest_shoe_size = " "
@@ -287,6 +295,7 @@ def big_shoe_rebounds
   end
   rebounds
 end
+
 
 def most_points_scored
   most_points = 0
