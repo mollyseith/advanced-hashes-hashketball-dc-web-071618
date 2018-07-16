@@ -296,7 +296,6 @@ def big_shoe_rebounds
   rebounds
 end
 
-
 def most_points_scored
   most_points = 0
   pts = 0
