@@ -148,9 +148,9 @@ end
 
 
 def num_points_scored(name)
-  #Iterate over the first level of the hash (ex. :home)
+  #1st level
   game_hash.each do |location, team_data|
-    #Iterate over the second level of the hash (ex. :team name)
+    #2nd level
       team_data.each do |attribute, data|
         if attribute == :players
           data.each do |player|
@@ -160,7 +160,6 @@ def num_points_scored(name)
                 if data[:player_name] == name
                   return data[:points]
                 end
-              #end
             end
           end
         end
@@ -168,23 +167,8 @@ def num_points_scored(name)
   end
 end
 
- #Iterate over the third level (ex. Brooklyn Nets)
-        # data.each do |item|
-        #   #Is the value a hash?
-        #     if item.class == Hash
-        #     #If yes, go through the hash (ex. :shoe => 10)
-        #       item.each do |k, v|
-        #         if k == name
-        #           v.collect do |category, val|
-        #             if category == :points
-        #               return v[category]
-        #             end
-        #             #binding.pry
-        #           end
-        #         end
-        #       end
-
 def shoe_size(name)
+  #third level
   game_hash.each do |location, team_data|
       team_data.each do |attribute, data|
         data.each do |item|
@@ -201,58 +185,51 @@ def shoe_size(name)
 end
 
 def team_colors(team_name)
-  #empty array for later use
   colors = []
-  #iterate over the top level of the hash
+  #top level
   game_hash.each do |location, team_data|
-    #check if the team name == the argument
+    #1st (team name)
     if team_data[:team_name].join == team_name
-      #iterate over the second level of the hash
+      #2nd level
       team_data.each do |team_deets, values|
-        #find the colors pair
+        #colors pair
         if team_deets == :colors
-          #add all the colors to the empty array
           colors << values
         end
       end
     end
   end
-  #flatten and return the array called colors
   colors = colors.flatten
 end
 
 def team_names
-  #empty array for later use
   team_names = []
-  #iterate over the top level of the hash
+  #top level
   game_hash.each do |location, team_data|
-      #iterate over the second level of the hash
+      #2nd level
       team_data.each do |team_deets, values|
-        #find the team_name pair
+        #find team name pair
         if team_deets == :team_name
-          #add the team name to the array called team_names
           team_names << team_data[team_deets]
         end
       end
   end
-  #flatten and return the array called team_names
   team_names = team_names.flatten
 end
 
 def player_numbers(team_name)
   player_nums = []
- #iterate over the top level of the hash
+ #top level
   game_hash.each do |location, team_data|
-    #Have you found the correct team?
+    #team?
     if game_hash[location][:team_name].join == team_name
-      #get access to all of the players
+      #all players
       game_hash[location][:players].each do |all_players|
-        #iterater over the nested hashes that represent each player
+        #iterate over players
         all_players.each do |player_name,stats|
-          #check if each stat is the player's number
+          #check number
           stats.each do |category, val|
             if category == :number
-              #shovel all the numbers into a list
               player_nums << stats[category]
             end
           end
@@ -260,13 +237,12 @@ def player_numbers(team_name)
       end
     end
   end
-  #return all player numbers
   player_nums
 end
 
 def player_stats(name)
   statistics = {}
- #iterate over the top level of the hash
+ #top level
   game_hash.each do |location, team_data|
       game_hash[location][:players].each do |all_players|
         all_players.each do |player_name,stats|
@@ -282,29 +258,26 @@ def player_stats(name)
 end
 
 def big_shoe_rebounds
-  # Hash to store all players' shoe sizes
   player_shoe_sizes = {}
-  # Variable to store name of player with largest shoe
   largest_shoe_size = " "
-  # Variable to track rebounds
   rebounds = ""
-  #Iterate over top level of hash
+  #top level
   game_hash.each do |location, team_data|
-    # Access first level of all player data
+    #1st level
       game_hash[location][:players].each do |all_players|
-        # Access second level of all player data
+        #2nd level
         all_players.each do |player_name,stats|
-          # Add each player name and shoe size to hash
+          #add names to shoe size
             player_shoe_sizes[player_name]= stats[:shoe]
         end
-        # Iterate over hash
+        #iterates
         player_shoe_sizes.each do |k, v|
-          # Get the name of the player with the largest shoe size
+          #name of player of largest shoe size
           if v == player_shoe_sizes.values.max
             largest_shoe_size = k
           end
         end
-        # Get the number of rebounds associated with the player with the largest shoe size
+        #rebounds of player of largest shoe size
         all_players.each do |p_name, statistics|
           if p_name == largest_shoe_size
             rebounds = statistics[:rebounds]
@@ -312,11 +285,9 @@ def big_shoe_rebounds
         end
       end
   end
-  # Return the number of rebounds
   rebounds
 end
 
-# BONUS
 def most_points_scored
   most_points = 0
   pts = 0
@@ -337,4 +308,4 @@ def most_points_scored
   most_scoring_player = player_and_points.keys
 
   player_and_points[0]
-end 
+end
